@@ -1,0 +1,18 @@
+/* pages/goodsDetail/goodsDetail.wxss */
+@import "../../template/HDcomponent.wxss";
+
+.banner,.banner image{
+  min-height: 300px;
+}
+
+.goods-detail-content{
+  line-height: 0;
+}
+
+.goods-detail-content image{
+  width: 100%;
+}
+
+page{
+  background: #f6f2f8;
+}

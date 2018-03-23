@@ -1,0 +1,6 @@
+/* pages/register/register.wxss */
+@import "../../template/HDcomponent.wxss";
+
+.shop-button{
+  margin: 15px;
+}

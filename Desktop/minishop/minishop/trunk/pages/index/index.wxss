@@ -1,0 +1,23 @@
+/* pages/index/index.wxss */
+@import "../../template/HDcomponent.wxss";
+
+.bottom-text{
+  text-align: center;
+  color: #888888;
+  font-size: 14px;
+}
+
+page{
+  background: #f6f2f8;
+}
+
+.login-btn button{
+  width: 100px;
+  padding:0;
+  line-height: 30px;
+  font-size: 14px;
+}
+
+.login-page{
+  margin-bottom: -80px;
+}

@@ -1,0 +1,12 @@
+/* pages/expressDetail/expressDetail.wxss */
+@import "../../template/HDcomponent.wxss";
+
+.p{
+  padding: 15px;
+  font-size: 14px;
+}
+
+.list>view{
+  padding: 10px;
+  color: #333333;
+}

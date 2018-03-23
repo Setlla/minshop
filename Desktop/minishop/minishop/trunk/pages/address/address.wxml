@@ -1,0 +1,7 @@
+<!--pages/address/address.wxml-->
+<import src="../../template/HDcomponent.wxml" />
+<template is="address-button" />
+<view wx:for="{{addressInfo.list}}" wx:key="{{index}}">
+  <template is="address-list" data="{{...item}}" />
+  <view class="index-space"></view>
+</view>

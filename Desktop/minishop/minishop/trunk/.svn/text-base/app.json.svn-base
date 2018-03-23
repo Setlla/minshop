@@ -1,0 +1,32 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/address/address",
+    "pages/collect/collect",
+    "pages/inviteCode/inviteCode",
+    "pages/walletDetail/walletDetail",
+    "pages/wallet/wallet",
+    "pages/orderDetail/orderDetail",
+    "pages/orderList/orderList",
+    "pages/subject/subject",
+    "pages/goodsDetail/goodsDetail",
+    "pages/findPwd/findPwd",
+    "pages/register/registerSubmit",
+    "pages/register/register",
+    "pages/login/login",
+    "pages/findPwd/findPwdSubmit",
+    "pages/orderConfirm/orderConfirm",
+    "pages/newAddress/newAddress",
+    "pages/myInfo/myInfo",
+    "pages/couponList/couponList",
+    "pages/bindInviteCode/bindInviteCode",
+    "pages/express/express",
+    "pages/expressDetail/expressDetail"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "紫色风铃",
+    "navigationBarTextStyle": "black"
+  }
+}

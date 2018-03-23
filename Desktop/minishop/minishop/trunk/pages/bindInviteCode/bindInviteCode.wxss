@@ -1,0 +1,9 @@
+/* pages/bindInviteCode/bindInviteCode.wxss */
+@import "../../template/HDcomponent.wxss";
+
+.codeInput {
+  text-align: center;
+  margin: 50px 0;
+  padding: 20px;
+  background: #eeeeee;
+}

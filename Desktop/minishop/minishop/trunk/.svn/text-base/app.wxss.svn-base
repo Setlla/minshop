@@ -1,0 +1,54 @@
+/**app.wxss**/
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
+}
+
+image {
+  width: auto;
+  height: auto;
+}
+
+.index-space {
+  height: 20px;
+}
+
+.hidden {
+  display: none;
+}
+
+page {
+  height: 100%;
+}
+
+.full-page {
+  height: 100%;
+}
+
+.bgWhite {
+  background: #fff;
+}
+
+.navigator-hover {
+  background: none;
+}
+
+.clearFx {
+  clear: both;
+}
+
+.clearFx:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+button:after {
+  border: none;
+}

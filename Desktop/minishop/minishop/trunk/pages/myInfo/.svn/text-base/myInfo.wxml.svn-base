@@ -1,0 +1,10 @@
+<!--pages/myInfo/myInfo.wxml-->
+<import src="../../template/HDcomponent.wxml" />
+<template is="my-info" data="{{...user}}"/>
+<view class="index-space"></view>
+<template wx:if="{{!user.isVip}}" is="detail-menu-list" data="{{...code}}" />
+<view class="index-space"></view>
+<template is="detail-menu-list" data="{{...pwd}}" />
+<view class="index-space"></view>
+<view class="index-space"></view>
+<template is="shop-button" data="{{...exitBtn}}"/>

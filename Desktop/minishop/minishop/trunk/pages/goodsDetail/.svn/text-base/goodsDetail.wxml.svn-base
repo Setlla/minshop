@@ -1,0 +1,16 @@
+<!--pages/goodsDetail/goodsDetail.wxml-->
+<import src="../../template/HDcomponent.wxml" />
+
+<template is="banner" data="{{...bannerList}}" />
+<template is="detail-info" data="{{...shopDetail}}" />
+<view class="index-space"></view>
+<template is="detail-menu-list" data="{{...spec}}" />
+<view class="index-space"></view>
+<template is="detail-menu-list" data="{{...remark}}" />
+<view class="goods-detail-content">
+  <image src="{{item}}" mode="widthFix" data="{{item}}" wx:for="{{goodsContent.list}}" wx:key="{{index}}"></image>
+</view>
+
+<template is="detail-spec" data="{{...specList}}"/>
+
+<template is="detail-menu" data="{{...collect}}" />

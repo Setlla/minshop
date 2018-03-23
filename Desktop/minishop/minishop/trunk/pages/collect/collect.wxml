@@ -1,0 +1,3 @@
+<!--pages/collect/collect.wxml-->
+<import src="../../template/HDcomponent.wxml" />
+<template is="collect-list" data="{{...collectList}}"/>

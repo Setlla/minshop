@@ -1,0 +1,9 @@
+<!--pages/orderList/orderList.wxml-->
+<import src="../../template/HDcomponent.wxml" />
+<template is="order-menu" data="{{...orderMenu}}" />
+<view class="index-space"></view>
+<view wx:for="{{orderList.list}}" wx:key="{{index}}">
+  <template is="order-list" data="{{...item}}" />
+  <view class="index-space"></view>
+</view>
+

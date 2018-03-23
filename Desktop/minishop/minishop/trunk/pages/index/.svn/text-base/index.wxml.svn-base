@@ -1,0 +1,52 @@
+<!--pages/index/index.wxml-->
+<import src="../../template/HDcomponent.wxml" />
+<view wx:if="{{menuBar.indexPage}}">
+  <template is="banner" data="{{...bannerList}}" />
+  <view class="index-space"></view>
+  <template is="shop-title" data="{{...shopTitle}}" />
+  <template is="shop-scroll-list" data="{{...shopList}}" />
+  <view class="index-space"></view>
+  <view wx:for="{{subjectList.list}}" wx:key="{{index}}">
+    <template is="shop-subject" data="{{...item}}" />
+    <view class="index-space"></view>
+  </view>
+  <view class="index-space"></view>
+  <view class="bottom-text">到底啦</view>
+</view>
+<view wx:elif="{{menuBar.shoppingCar}}">
+  <view class="index-space"></view>
+  <template is="shopping-car" wx:for="{{shoppingCar.list}}" wx:key="{{index}}" data="{{...item}}" />
+  <template is="shopping-car-bottom" data="{{...shoppingCar}}" />
+</view>
+<view wx:elif="{{menuBar.typePage}}">
+  <!--第一版先不做-->
+  <!-- <template is="search-input" /> -->
+  <template is="goods-type" data="{{...goodsTypeList}}" />
+  <template is="shop-list" data="{{...shopTypeList}}" />
+</view>
+<view wx:elif="{{menuBar.myInfoPage}}" class="bgWhite full-page login-page">
+  <view wx:if="{{user.isLogin}}">
+    <view class="index-space bgWhite"></view>
+    <template is="user-picture-login" data="{{...user}}" />
+    <view class="index-space bgWhite"></view>
+    <template is="user-center-menu" />
+    <view class="index-space"></view>
+    <view>
+      <template is="user-menu-list" data="{{...item}}" wx:for="{{userMenuList.list}}" wx:key="{{index}}" />
+    </view>
+  </view>
+
+  <view wx:else>
+    <view class="index-space"></view>
+    <template is="user-picture" data="{{...userPicture}}" />
+    <view class="index-space"></view>
+    <view class="login-btn">
+      <template is="shop-button" data="{{...userBtn}}" />
+    </view>
+  </view>
+</view>
+
+
+
+
+<template is="menu-bar" data="{{menuBar}}" />

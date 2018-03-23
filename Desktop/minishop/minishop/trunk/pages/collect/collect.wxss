@@ -1,0 +1,5 @@
+/* pages/collect/collect.wxss */
+@import "../../template/HDcomponent.wxss";
+page{
+  background:#f6f2f8;
+}

@@ -1,0 +1,3 @@
+<!--pages/walletDetail/walletDetail.wxml-->
+<import src="../../template/HDcomponent.wxml" />
+<template is="wallet-detail-list" data="{{...walletList}}"/>

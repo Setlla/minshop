@@ -1,0 +1,13 @@
+<!--pages/expressDetail/expressDetail.wxml-->
+<view class="p">
+  <text>快递单号：{{num}}</text>
+</view>
+<view class="p">
+  <text>快递公司：{{name}}</text>
+</view>
+<view class="p list">
+  <text>快递进度：</text>
+  <view wx:for="{{list}}" wx:key="{{index}}">
+    <text>{{item.item}}{{item.status}}</text>
+  </view>
+</view>

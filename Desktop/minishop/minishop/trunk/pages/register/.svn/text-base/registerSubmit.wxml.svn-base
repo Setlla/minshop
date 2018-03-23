@@ -1,0 +1,6 @@
+<!--pages/register/registerSubmit.wxml-->
+<import src="../../template/HDcomponent.wxml" />
+<template is="shop-input" data="{{...pwd}}" />
+<template is="shop-input" data="{{...pwdConfirm}}" />
+<view class="index-space"></view>
+<template is="shop-button" data="{{...submitBtn}}" />

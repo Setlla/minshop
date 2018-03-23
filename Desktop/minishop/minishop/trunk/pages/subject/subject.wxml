@@ -1,0 +1,4 @@
+<!--pages/subject/subject.wxml-->
+<import src="../../template/HDcomponent.wxml" />
+<template is="shop-subject" data="{{...subjectList}}" />
+<template is="shop-list" data="{{...shopList}}"/>

@@ -1,0 +1,5 @@
+<!--pages/bindInviteCode/bindInviteCode.wxml-->
+<view>
+  <input class="codeInput"  type="text" placeholder="请输入邀请码" bindinput="inputChange" value="{{value}}" />
+  <button class="shop-button" bindtap="bindCodeTap">确定</button>
+</view>

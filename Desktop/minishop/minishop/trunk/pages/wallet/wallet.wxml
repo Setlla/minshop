@@ -1,0 +1,6 @@
+<!--pages/wallet/wallet.wxml-->
+<import src="../../template/HDcomponent.wxml" />
+<view class="index-space"></view>
+<navigator hover-class="none" open-type="navigate" url="../walletDetail/walletDetail">
+  <template is="wallet-menu-list" data="{{...money}}" />
+</navigator>

@@ -1,0 +1,5 @@
+<!--pages/express/express.wxml-->
+<import src="../../template/HDcomponent.wxml" />
+<view wx:for="{{expressList.list}}" wx:key="{{index}}">
+  <template is="express" data="{{...item}}" />
+</view>

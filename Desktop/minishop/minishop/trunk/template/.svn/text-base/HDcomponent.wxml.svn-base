@@ -1,0 +1,619 @@
+<!--轮播图-->
+<template name="banner">
+  <swiper class="banner" indicator-dots="true" style="height:{{height}}">
+    <swiper-item wx:for="{{list}}" wx:key="{{index}}">
+      <navigator url="{{item.url}}">
+        <image src="{{item.imgSrc}}" mode="widthFix" bindload="imgLoad"></image>
+      </navigator>
+    </swiper-item>
+  </swiper>
+</template>
+<!--底部导航-->
+<template name="menu-bar">
+  <view class="menu-bar-block"></view>
+  <view class="menu-bar">
+    <view data-id="indexPage" bindtap="menuBarTap">
+      <image wx:if="{{menuBar.indexPage}}" src="../../images/home_on.png" mode="widthFix"></image>
+      <image wx:else src="../../images/home.png" mode="widthFix"></image>
+      <text>首页</text>
+    </view>
+    <view data-id="typePage" bindtap="menuBarTap">
+      <image wx:if="{{menuBar.typePage}}" src="../../images/type_on.png" mode="widthFix"></image>
+      <image wx:else src="../../images/type.png" mode="widthFix"></image>
+      <text>分类</text>
+    </view>
+    <view data-id="shoppingCar" bindtap="menuBarTap">
+      <image wx:if="{{menuBar.shoppingCar}}" src="../../images/shoppingCar_on.png" mode="widthFix"></image>
+      <image wx:else src="../../images/shoppingCar.png" mode="widthFix"></image>
+      <text>购物车</text>
+    </view>
+    <view data-id="myInfoPage" bindtap="menuBarTap">
+      <image wx:if="{{menuBar.myInfoPage}}" src="../../images/myInfo_on.png" mode="widthFix"></image>
+      <image wx:else src="../../images/myInfo.png" mode="widthFix"></image>
+      <text>我的</text>
+    </view>
+  </view>
+</template>
+<!--分类标题-->
+<template name="shop-title">
+  <view class="shop-title">
+    <image src="{{imgSrc}}" mode="widthFix"></image>
+  </view>
+</template>
+<!--横向滚动商品-->
+<template name="shop-scroll-list">
+  <scroll-view class="shop-scroll-list" scroll-x="true">
+    <view data-id="{{item.id}}" wx:for="{{list}}" wx:key="{{index}}" class="shop-list-item" bindtap="goodsDetailTap">
+      <view>
+        <image src="{{item.imgSrc}}" mode="widthFix"></image>
+      </view>
+      <view>
+        <view class="name">{{item.name}}</view>
+        <view class="description">{{item.description}}</view>
+        <view>
+          <text class="price">￥{{item.price}}</text>
+          <text class="marketPrice">{{item.marketPrice}}</text>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</template>
+<!--专题-->
+<template name="shop-subject">
+  <view class="shop-subject" bindtap="subjectTap" data-id="{{id}}" data-title="{{name}}">
+    <view>
+      <image src="{{img}}" mode="widthFix"></image>
+    </view>
+    <view>
+      <view class="name">{{name}}</view>
+      <view class="content">{{content}}</view>
+    </view>
+  </view>
+</template>
+<!--用户图片-->
+<template name="user-picture">
+  <view class="user-picture">
+    <image src="{{src}}" mode="widthFix"></image>
+  </view>
+</template>
+<template name="user-picture-login">
+  <view class="user-picture" bindtap="myInfoTap">
+    <image src="{{img}}" mode="widthFix"></image>
+    <image wx:if="{{isVip}}" mode="widthFix" class="vip" src="../../images/icon_vip.png"></image>
+    <text class="userName">{{name}}</text>
+    <view catchtap="bindCodeTap" wx:if="{{!isVip}}">
+      <image class="bind-code" src="../../images/bindCode.png" mode="widthFix"></image>
+      <text class="bind-text">绑定邀请码</text>
+    </view>
+  </view>
+</template>
+<!--按钮-->
+<template name="shop-button">
+  <button id="{{id}}" class="shop-button" bindtap="btnTap">{{text}}</button>
+</template>
+<!--输入框-->
+<template name="shop-input">
+  <view class="shop-input">
+    <text>{{text}}：</text>
+    <input id="{{id}}" type="{{type}}" placeholder="{{tip}}" bindinput="inputChange" value="{{value}}" />
+  </view>
+</template>
+<template name="shop-input-validate">
+  <view class="shop-input">
+    <text>{{text}}：</text>
+    <input id="{{id}}" type="{{type}}" placeholder="{{tip}}" bindinput="inputChange" />
+    <button bindtap="validateTap" plain="true">获取验证码{{time}}</button>
+  </view>
+</template>
+<!--登录按钮组-->
+<template name="login-btn-group">
+  <view class="login-btn-group">
+    <text bindtap="btnLeftTap">{{btnLeft}}</text>
+    <text bindtap="btnRightTap">{{btnRight}}</text>
+  </view>
+</template>
+
+<!--用户中心选项-->
+<template name="user-center-menu">
+  <view class="user-center-menu">
+    <view>
+      <navigator hover-class="none" open-type="navigate" url="../orderList/orderList">
+        <image src="../../images/order.png" mode="widthFix"></image>
+        <text>订单</text>
+      </navigator>
+    </view>
+    <view>
+      <navigator hover-class="none" open-type="navigate" url="../wallet/wallet">
+        <image src="../../images/wallet.png" mode="widthFix"></image>
+        <text>钱包</text>
+      </navigator>
+    </view>
+    <view>
+      <navigator hover-class="none" open-type="navigate" url="../inviteCode/inviteCode">
+        <image src="../../images/invite.png" mode="widthFix"></image>
+        <text>邀请码</text>
+      </navigator>
+    </view>
+  </view>
+</template>
+<!--菜单列表-->
+<template name="user-menu-list">
+  <view class="user-menu-list">
+    <view wx:if="{{btn}}">
+      <button open-type="contact"></button>
+      <image class="img" src="{{img}}" mode="widthFix"></image>
+      <text>{{text}}</text>
+      <image class="arrow" src="../../images/arrow.png" mode="widthFix"></image>
+    </view>
+    <navigator hover-class="none" open-type="navigate" url="{{url}}" wx:else>
+      <image class="img" src="{{img}}" mode="widthFix"></image>
+      <text>{{text}}</text>
+      <image class="arrow" src="../../images/arrow.png" mode="widthFix"></image>
+    </navigator>
+  </view>
+</template>
+<!--详情内容-->
+<template name="detail-info">
+  <view class="detail-info">
+    <view class="name">
+      <text>{{name}} </text>
+      <button open-type="share">
+        <image src="../../images/share.png" mode="widthFix"></image>
+      </button>
+    </view>
+    <view class="description">{{description}}</view>
+    <view>
+      <text class="price">￥{{price}}</text>
+      <text class="marketPrice">{{marketPrice}}</text>
+      <text wx:if="{{isVip}}" class="bonus">奖励{{bonus}}</text>
+    </view>
+    <view class="express">
+      <text>税费：包税</text>
+      <text>邮费：免邮费（偏远地区除外）</text>
+    </view>
+  </view>
+</template>
+<!--详情底部菜单-->
+<template name="detail-menu">
+  <view class="detail-menu-block"></view>
+  <view class="detail-menu">
+    <view class="icon-btn">
+      <navigator hover-class="none" open-type="reLaunch" url="../index/index?shoppingCar=true">
+        <view>
+          <image src="../../images/shopping-car.png" mode="widthFix"></image>
+          <text>购物车</text>
+        </view>
+      </navigator>
+      <view bindtap="collectTap">
+        <image wx:if="{{isFavorites}}" src="../../images/icon_goodstar.png" mode="widthFix"></image>
+        <image wx:else src="../../images/collect.png" mode="widthFix"></image>
+        <text>收藏</text>
+      </view>
+    </view>
+    <view class="btn">
+      <view bindtap="shoppingCarTap">加入购物车</view>
+      <view bindtap="goodsPayTap">立即购买</view>
+    </view>
+  </view>
+</template>
+
+<!--详情规格弹窗-->
+<template name="detail-spec">
+  <view class="detail-spec" hidden="{{hidden}}">
+    <view class="bg" bindtap="specClose"></view>
+    <view class="spec-block">
+      <view class="head">
+        <image src="{{img}}"></image>
+        <text>￥{{price}}</text>
+      </view>
+      <view class="spec-list">
+        <view>规格</view>
+        <view>
+          <text wx:for="{{list}}" wx:key="{{index}}" class="{{item.selected}}" data-id="{{item.id}}" bindtap="specTap">{{item.name}}</text>
+        </view>
+      </view>
+      <view class="number">
+        <view>数量</view>
+        <view>
+          <text id="numMinus" bindtap="numberTap">-</text>
+          <input id="numAdd" type="number" value="{{num}}" bindinput="numberTap" />
+          <text bindtap="numberTap">+</text>
+        </view>
+      </view>
+      <button class="shop-button" bindtap="specClose">确定</button>
+    </view>
+  </view>
+</template>
+
+<!--选择菜单列-->
+<template name="detail-menu-list">
+  <view id="{{id}}" class="detail-menu-list" bindtap="detailMenuTap">
+    <text class="left">{{leftText}}</text>
+    <image src="../../images/arrow.png" mode="widthFix"></image>
+    <text class="right">{{rightText}}</text>
+  </view>
+</template>
+<!--纵向商品列表-->
+<template name="shop-list">
+  <view class="shop-list">
+    <view class="list-item" wx:for="{{list}}" wx:key="{{index}}" data-id="{{item.id}}" bindtap="goodsDetailTap">
+      <view class="bg">
+        <view>
+          <image src="{{item.imgSrc}}" mode="widthFix" mode="widthFix"></image>
+        </view>
+        <view>
+          <view class="name">{{item.name}}</view>
+          <view class="description">{{item.description}}</view>
+          <view>
+            <text class="price">￥{{item.price}}</text>
+            <text class="marketPrice">{{item.marketPrice}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>
+
+<!--订单顶部菜单-->
+<template name="order-menu">
+  <view class="order-menu">
+    <view wx:for="{{list}}" wx:key="{{index}}" data-status="{{item.status}}" class="{{item.select}}" bindtap="orderListTap">{{item.text}} </view>
+  </view>
+  <view class="order-menu-block"></view>
+</template>
+
+<!--订单列表-->
+<template name="order-list">
+  <view class="order-list" bindtap="orderDetailTap" data-id="{{id}}">
+    <view class="shop">
+      <image src="{{shopImg}}" mode="widthFix"></image>
+      <text>{{shopName}}</text>
+      <text>{{orderStatusText}}</text>
+    </view>
+    <view class="goods" wx:for="{{list}}" wx:key="{{index}}">
+      <view class="left">
+        <image src="{{item.imgSrc}}" mode="widthFix"></image>
+      </view>
+      <view class="right">
+        <view class="name">{{item.name}}</view>
+        <view class="description">{{item.description}}</view>
+        <view class="spec">规格：{{item.spec}}</view>
+        <view>
+          <text class="price">¥{{item.price}}</text>
+          <text class="num">x{{item.num}}</text>
+        </view>
+      </view>
+    </view>
+    <view class="count">
+      <text>实付款：¥{{pay}}</text>
+      <button wx:if="{{orderStatus==20}}" data-status="pay" class="shop-button" catchtap="orderBtnTap" data-id="{{id}}" data-price="{{pay}}">去支付</button>
+      <button wx:if="{{orderStatus==20}}" data-status="cancel" class="shop-button" catchtap="orderBtnTap" data-id="{{id}}" data-price="{{pay}}">取消</button>
+      <button wx:if="{{orderStatus==40}}" data-status="express" class="shop-button" catchtap="orderBtnTap" data-id="{{id}}">查看物流</button>
+      <button wx:if="{{orderStatus==40}}" data-status="confirm" class="shop-button" catchtap="orderBtnTap" data-id="{{id}}">确认收货</button>
+      <button wx:if="{{orderStatus==50}}" data-status="remark" class="shop-button" catchtap="orderBtnTap" data-id="{{id}}">去评价</button>
+      <button wx:if="{{orderStatus==70||orderStatus==50}}" data-status="delete" class="shop-button" catchtap="orderBtnTap" data-id="{{id}}">删除</button>
+    </view>
+  </view>
+</template>
+
+<!--订单详情状态-->
+<template name="order-detail-status">
+  <view class="order-detail-status">
+    <image mode="widthFix"></image>
+    <text>{{text}}</text>
+  </view>
+</template>
+
+<!--订单详情信息-->
+<template name="order-detail-info">
+  <view class="order-detail-info" bindtap="addressSetTap">
+    <image src="../../images/address.png" mode="widthFix"></image>
+    <view>
+      <view>
+        <text class="left">{{name}}</text>
+        <text class="right">{{phone}}</text>
+      </view>
+      <view class="address">{{address}}</view>
+    </view>
+  </view>
+</template>
+
+<!--订单详情商品-->
+<template name="order-detail-goods">
+  <view class="order-list">
+    <view class="shop">
+      <image src="{{shopImg}}" mode="widthFix"></image>
+      <text>{{shopName}}</text>
+    </view>
+    <view class="goods" wx:for="{{list}}" wx:key="{{index}}">
+      <view class="left">
+        <image src="{{item.imgSrc}}" mode="widthFix"></image>
+      </view>
+      <view class="right">
+        <view class="name">{{item.name}}</view>
+        <view class="description">{{item.description}}</view>
+        <view class="spec">规格：{{item.spec}}</view>
+        <view>
+          <text class="price">¥{{item.price}}</text>
+          <text class="num">x{{item.num}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>
+
+<!--订单详情内容-->
+<template name="order-detail-content">
+  <view class="order-detail-content">
+    <view class="text">
+      <text>订单编号：{{orderNo}}</text>
+      <text>下单时间：{{startTime}}</text>
+    </view>
+    <view class="index-space"></view>
+    <view class="text">
+      <text>商品总额：￥{{goodsPrice}}</text>
+      <text>+运费：￥{{express}}</text>
+      <text>-优惠券减免：￥{{discount}}</text>
+    </view>
+    <view class="text top-line price">
+      实付款：
+      <text>￥{{price}}</text>
+    </view>
+  </view>
+</template>
+<!--订单详情按钮-->
+<template name="order-detail-btn">
+  <view wx:if="{{orderStatus==20}}" class="order-detail-btn">
+    <text data-status="cancel" class="cancel-button" bindtap="orderBtnTap" data-id="{{id}}">取消订单</text>
+    <text data-status="pay" class="pay-button" bindtap="orderBtnTap" data-id="{{id}}" data-price="{{pay}}">去支付</text>
+  </view>
+  <view wx:if="{{orderStatus==40}}" class="order-detail-btn">
+    <text data-status="express" class="cancel-button" bindtap="orderBtnTap" data-id="{{id}}">查看物流</text>
+    <text data-status="confirm" class="pay-button" bindtap="orderBtnTap" data-id="{{id}}">确认收货</text>
+  </view>
+  <view wx:if="{{orderStatus==50}}" class="order-detail-btn">
+    <text data-status="remark" class="pay-button" bindtap="orderBtnTap" data-id="{{id}}">去评价</text>
+  </view>
+  <view wx:if="{{orderStatus==70}}" class="order-detail-btn">
+    <text data-status="delete" class="pay-button" bindtap="orderBtnTap" data-id="{{id}}">删除</text>
+  </view>
+</template>
+<!--钱包-->
+<template name="wallet-menu-list">
+  <view class="detail-menu-list">
+    <text class="left">余额：￥{{num}}</text>
+    <image src="../../images/arrow.png" mode="widthFix"></image>
+    <text class="right">明细</text>
+  </view>
+</template>
+<!--钱包明细-->
+<template name="wallet-detail-list">
+  <view class="wallet-detail-list">
+    <view wx:for="{{list}}" wx:key="{{index}}">
+      <view class="row" wx:if="{{item.status=='in'}}">
+        <text>奖励</text>
+        <text class="in">+¥{{item.price}}</text>
+      </view>
+      <view class="row" wx:else>
+        <text>支出</text>
+        <text class="out">-¥{{item.price}}</text>
+      </view>
+      <view class="row">
+        <text>订单编号：{{item.orderNo}}</text>
+        <text>{{item.time}}</text>
+      </view>
+    </view>
+  </view>
+</template>
+<!--邀请码-->
+<template name="invite-code">
+  <view class="invite-code" bindtap="copyCode" data-code="{{text}}">
+    <view>邀请码</view>
+    <view>
+      <image mode="widthFix"></image>
+      <text>{{text}}</text>
+      <image mode="widthFix"></image>
+    </view>
+    <view>点击复制分享给好友</view>
+    <view>好友绑定邀请码之后，在紫色风铃上的每一笔消费，你都将获得一笔佣金</view>
+  </view>
+</template>
+<!--搜索-->
+<template name="search-input">
+  <view class="search-input">
+    <input type="text" confirm-type="search" placeholder="搜索商品" />
+  </view>
+</template>
+<!--商品分类-->
+<template name="goods-type">
+  <scroll-view class="goods-type" scroll-x="true">
+    <view wx:for="{{list}}" wx:key="{{index}}" bindtap="goodsTypeTap" data-id="{{item.id}}">
+      <image src="{{item.img}}" mode="widthFix"></image>
+      <text wx:if="{{item.isChecked}}" class="on">{{item.name}}</text>
+      <text wx:else>{{item.name}}</text>
+    </view>
+  </scroll-view>
+</template>
+
+<!--购物车-->
+<template name="shopping-car">
+  <view class="shopping-car order-list">
+    <view class="shop">
+      <view class="checkbox" catchtap="shopCheckboxTap" data-id="{{shopId}}">
+        <image wx:if="{{isChecked}}" src="../../images/icon_gouxuan.png" mode="widthFix"></image>
+        <image class="border" wx:else src="" mode="widthFix"></image>
+      </view>
+      <image src="{{shopImg}}" mode="widthFix"></image>
+      <text>{{shopName}}</text>
+      <view class="clearFx"></view>
+    </view>
+    <view class="goods" wx:for="{{list}}" wx:key="{{index}}" data-id="{{item.id}}" bindtap="goodsDetailTap">
+      <view class="checkbox" catchtap="checkboxTap" data-id="{{item.id}}">
+        <image wx:if="{{item.isChecked}}" src="../../images/icon_gouxuan.png" mode="widthFix"></image>
+        <image class="border" wx:else src="" mode="widthFix"></image>
+      </view>
+      <view class="left">
+        <image src="{{item.imgSrc}}" mode="widthFix"></image>
+      </view>
+      <view class="right">
+        <view class="name">{{item.name}}</view>
+        <view class="description">{{item.description}}</view>
+        <view class="spec">规格：{{item.spec}}</view>
+        <view>
+          <text class="price">¥{{item.price}}</text>
+          <view class="number">
+            <text data-id="numMinus" data-pid="{{item.id}}" catchtap="numberTap">-</text>
+            <input data-id="numAdd" catchtap="numberTap" data-pid="{{item.id}}" type="number" value="{{item.num}}" bindinput="numberTap" />
+            <text catchtap="numberTap" data-pid="{{item.id}}">+</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="index-space"></view>
+</template>
+
+<!--购物车底部操作栏-->
+<template name="shopping-car-bottom">
+  <view class="shopping-car-bottom">
+    <label>
+      <view class="checkbox" catchtap="checkboxAllTap">
+        <image wx:if="{{isChecked}}" src="../../images/icon_gouxuan.png" mode="widthFix"></image>
+        <image class="border" wx:else src="" mode="widthFix"></image>
+      </view>
+      全选
+    </label>
+    <button class="shop-button" bindtap="orderConfirmTap">去结算</button>
+    <text>合计：￥{{price}}</text>
+  </view>
+</template>
+
+<!--收藏详情-->
+<template name="collect-list">
+  <view class="collect-list order-list">
+    <view class="goods" wx:for="{{list}}" wx:key="{{index}}">
+      <view class="left">
+        <image src="{{item.imgSrc}}" mode="widthFix"></image>
+      </view>
+      <view class="right">
+        <view class="name">{{item.name}}</view>
+        <view class="description">{{item.description}}</view>
+        <view>
+          <text class="price">¥{{item.price}}</text>
+        </view>
+      </view>
+      <view class="btn">
+        <navigator hover-class="none" open-type="navigate" url="../goodsDetail/goodsDetail?id={{item.id}}">
+          <button class="shop-button">去看看</button>
+        </navigator>
+        <text class="cancel" bindtap="cancelTap" data-id="{{item.id}}">取消收藏</text>
+      </view>
+    </view>
+  </view>
+</template>
+<!--确定订单操作-->
+<template name="order-confirm-btn">
+  <view class="order-confirm-btn-block"></view>
+  <view class="order-confirm-btn shopping-car-bottom">
+    <button class="shop-button" bindtap="orderSubmit">去支付</button>
+    <text>总计：￥{{sum}}</text>
+  </view>
+</template>
+<!--确认订单价格统计-->
+<template name="order-confirm-price">
+  <view class="order-confirm-price">
+    <text>运费：<text class="value">{{freight}}</text></text>
+    <text>价格合计：<text class="value">{{price}}</text></text>
+  </view>
+</template>
+<!--新增收货地址顶部按钮-->
+<template name="address-button">
+  <view class="address-button">
+    <navigator hover-class="none" open-type="navigate" url="../newAddress/newAddress">
+      <button>+新增收货地址</button>
+    </navigator>
+  </view>
+</template>
+<!--新增收货地址列表-->
+<template name="address-list">
+  <view class="address-list">
+    <view class="info">
+      <text>{{name}}</text>
+      <text>{{phone}}</text>
+    </view>
+    <view class="address">
+      {{address}}
+    </view>
+    <view class="button">
+      <view bindtap="checkBoxTap" data-id="{{id}}">
+        <image wx:if="{{isChecked}}" src="../../images/icon_gouxuan.png" mode="widthFix"></image>
+        <image class="border" wx:else src="" mode="widthFix"></image>
+        <text>设为默认地址</text>
+      </view>
+      <button data-id="{{id}}" bindtap="deleteTap" data-checked="{{isChecked}}">
+        <image src="../../images/delete.png" mode="widthFix"></image>删除
+      </button>
+      <navigator hover-class="none" open-type="navigate" url="../newAddress/newAddress?id={{id}}">
+        <button>
+          <image src="../../images/edit.png" mode="widthFix"></image>编辑
+        </button>
+      </navigator>
+
+    </view>
+  </view>
+</template>
+<!--地址选择-->
+<template name="addr-select">
+  <picker class="addr-select" mode="multiSelector" bindchange="citySelect" bindcolumnchange="cityColChange" range="{{list}}" range-key="{{'name'}}" value="{{selected}}">
+    <view class="picker">
+      省/市/区: {{text}}
+    </view>
+  </picker>
+</template>
+<!--个人信息-->
+<template name="my-info">
+  <view class="my-info">
+    <view class="clearFx" bindtap="uploadImgTap">
+      <text class="left middle">头像</text>
+      <image class="right" src="{{userPictrue}}" mode="widthFix"></image>
+      <image wx:if="{{isVip}}" mode="widthFix" class="vip" src="../../images/icon_vip.png"></image>
+    </view>
+    <view class="clearFx">
+      <text class="left">昵称</text>
+      <input id="nickName" class="right" type="text" value="{{nickName}}" bindblur="inputChange"></input>
+    </view>
+    <view class="clearFx">
+      <text class="left">性别</text>
+      <input id="sex" class="right" type="text" value="{{sex}}" bindblur="inputChange"></input>
+    </view>
+  </view>
+</template>
+<!--优惠券选择-->
+<template name="discount-select">
+  <view class="discount-select" hidden="{{hidden}}">
+    <view class="bg" bindtap="discountCloseTap"></view>
+    <view class="coupon-list">
+      <view wx:for="{{list}}" wx:key="{{index}}" class="coupon" bindtap="discountTap" id="{{item.id}}">
+        <view>
+          <text>{{item.price}}￥</text>
+          <text class="small-text">满{{item.condition}}可用</text>
+        </view>
+        <view>
+          <text>{{item.name}}</text>
+          <text class="small-text">有效期 {{item.endTime}}</text>
+        </view>
+        <image wx:if="{{item.isChecked}}" src="../../images/icon_gouxuan.png" mode="widthFix"></image>
+        <image class="border" wx:else src="" mode="widthFix"></image>
+      </view>
+      <button class="shop-button" bindtap="confirmTap">确定</button>
+    </view>
+  </view>
+</template>
+
+<!--物流箱子列表-->
+<template name="express">
+  <view class="express" id="{{id}}" data-code="{{code}}" bindtap="expressDetailTap">
+    <image mode="widthFix" src="../../images/express.png"></image>
+    <text>{{name}}</text>
+  </view>
+</template>

@@ -1,0 +1,10 @@
+<!--pages/orderDetail/orderDetail.wxml-->
+<import src="../../template/HDcomponent.wxml" />
+
+<template is="order-detail-status" data="{{...orderStatus}}" />
+<template is="order-detail-info" data="{{...user}}" />
+<view class="index-space"></view>
+<template is="order-detail-goods" data="{{...orderList}}" />
+<view class="index-space"></view>
+<template is="order-detail-content" data="{{...orderInfo}}" />
+<template is="order-detail-btn" data="{{...orderList}}" />

@@ -1,0 +1,19 @@
+<!--pages/orderConfirm/orderConfirm.wxml-->
+<import src="../../template/HDcomponent.wxml" />
+
+<template is="order-detail-info" data="{{...user}}" />
+<view class="index-space"></view>
+<view wx:for="{{orderList.list}}" wx:key="{{index}}">
+  <template is="order-detail-goods" data="{{...item}}" />
+  <template is="detail-menu-list" data="{{...item.discount}}" />
+  <template is="order-confirm-price" data="{{...item}}"/>
+  <view class="index-space"></view>
+</view>
+<view class="index-space"></view>
+<picker mode="selector" range="{{deliver.list}}" range-key="name" bindchange="deliverTap">
+  <template is="detail-menu-list" data="{{...deliver}}" />
+</picker>
+<view class="index-space"></view>
+
+<template is="order-confirm-btn" data="{{...count}}" />
+<template is="discount-select" data="{{...discount}}" />

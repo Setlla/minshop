@@ -1,0 +1,3 @@
+<!--pages/inviteCode/inviteCode.wxml-->
+<import src="../../template/HDcomponent.wxml" />
+<template is="invite-code" data="{{...inviteCode}}"/>

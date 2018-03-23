@@ -1,0 +1,6 @@
+/* pages/findPwd/findPwdSubmit.wxss */
+@import "../../template/HDcomponent.wxss";
+
+.shop-button{
+  margin: 15px;
+}

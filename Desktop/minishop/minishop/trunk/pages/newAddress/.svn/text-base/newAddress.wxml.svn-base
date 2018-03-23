@@ -1,0 +1,7 @@
+<!--pages/newAddress/newAddress.wxml-->
+<import src="../../template/HDcomponent.wxml" />
+<template is="shop-input" data="{{...inputText.list[0]}}" />
+<template is="shop-input" data="{{...inputText.list[1]}}" />
+<template is="addr-select" data="{{...cityList}}" />
+<template is="shop-input" data="{{...inputText.list[2]}}" />
+<template is="shop-button" data="{{...submitBtn}}" />

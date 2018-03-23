@@ -1,0 +1,14 @@
+<!--pages/findPwd/findPwd.wxml-->
+<import src="../../template/HDcomponent.wxml" />
+
+<view class="index-space"></view>
+<template is="user-picture" data="{{...userPicture}}"/>
+
+<template is="shop-input" data="{{...phone}}" />
+<template is="shop-input-validate" data="{{...pwd}}" />
+
+<view class="index-space"></view>
+
+<template is="shop-button" data="{{...loginBtn}}" />
+
+<template is="login-btn-group" data="{{...btnGroup}}"/>
